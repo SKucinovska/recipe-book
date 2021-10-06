@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Shopping list
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-list *ngIf="recipe?.ingredients.length">
+      <ion-list-header>
+        {{recipe?.recipeName}}
+        <ion-button slot="end">increase amount</ion-button>
+      </ion-list-header>
+  
+      <ion-item *ngFor="let item of recipe?.ingredients; let i=index">
+        <ion-icon name="cart" slot="start"></ion-icon>
+          {{item.amount}} {{item.unit}} {{item.name}}
+        <ion-button slot="end" (click)="removeItem(i)">Remove</ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

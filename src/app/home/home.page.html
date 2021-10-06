@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar placeholder="Search by category"  (ionInput)="filterRecipes($event)"></ion-searchbar>
+  <ion-card *ngFor="let item of recipes" routerLink="/recipe-details/{{item.id}}" routerDirection="forward">
+    <img [src]="item.image">
+      <ion-card-header>{{item.recipeName}}</ion-card-header>  
+  </ion-card>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+        <ion-icon name="add" (click)="goToAddRecipe()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

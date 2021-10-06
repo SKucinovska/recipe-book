@@ -1,0 +1,52 @@
+.icon{
+    width: 64px;
+    height: 64px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    display: block;
+   
+}
+
+h3{
+    margin: 0px;
+    color: #765d69;
+    
+}
+
+.section2{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.margin1{
+    margin-bottom: 30px;
+}
+
+.margin2{
+    margin-top: 20px;
+}
+
+.centar{
+   margin-right: auto;
+   margin-left: auto;
+   display: block;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid lightgray;
+}
+.separator::before {
+    margin-right: .25em;
+}
+.separator::after {
+    margin-left: .25em;
+}

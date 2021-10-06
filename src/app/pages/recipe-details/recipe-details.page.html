@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{recipe?.recipeName}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <img [src]="recipe?.image">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button  [routerLink]="['/shoppingList', recipeId]">Go shopping</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button *ngIf = "!recipe?.favourite" (click)="addToFavourites()" >Add to favourites</ion-button>
+          <ion-button *ngIf = "recipe?.favourite" (click)="removeFromFavourites()">Remove from favourites</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-list class="list">
+      <ion-list-header>Ingredients</ion-list-header>
+      <ion-item *ngFor="let ingredient of recipe?.ingredients; let i=index">
+        {{ingredient.amount}} {{ingredient.unit}} {{ingredient.name}}
+      </ion-item> 
+    </ion-list>  
+   
+    <ion-list class="list">
+      <ion-list-header>Steps</ion-list-header>
+      <ion-item *ngFor="let step of recipe?.steps; let i=index">{{step}}</ion-item>
+    </ion-list> 
+  </div>
+</ion-content>

@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Recipe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<form [formGroup]="addRecipeForm" class="addMargin">
+  <!--Insert name of the recipe-->
+  <ion-item>
+    <ion-label position="floating">Recipe name</ion-label>
+    <ion-input type="text" formControlName="recipeName"></ion-input>
+  </ion-item>
+  <!--Displaying error message for input for Recipe name-->
+  <div *ngFor="let error of error_message.recipeName">
+    <ion-label *ngIf="addRecipeForm.controls.recipeName.hasError(error.type) && (addRecipeForm.controls.recipeName.dirty || addRecipeForm.controls.recipeName.touched)">{{error.message}}</ion-label> 
+  </div>
+
+  <!--Choose category-->
+  <ion-item>
+    <ion-label>Category</ion-label>
+    <ion-select interface="popover" formControlName="category">
+      <ion-select-option *ngFor="let category of categories">{{category}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+ <!--<ion-button (click)="addCategory()">+</ion-button>-->
+
+  <!--Error messages for category validation-->
+  <div *ngFor="let error of error_message.category">
+    <ion-label *ngIf="addRecipeForm.controls.category.hasError(error.type) && (addRecipeForm.controls.category.dirty || addRecipeForm.controls.category.touched)">{{error.message}}</ion-label> 
+  </div>
+
+  <ion-item>
+    <ion-label position="floating">Preparation time</ion-label>
+    <ion-input type="text" formControlName="preparationTime"></ion-input>
+  </ion-item>
+  <div *ngFor="let error of error_message.preparationTime">
+    <ion-label *ngIf="addRecipeForm.controls.preparationTime.hasError(error.type) && (addRecipeForm.controls.preparationTime.dirty || addRecipeForm.controls.preparationTime.touched)">{{error.message}}</ion-label> 
+  </div>
+
+  <!--Add ingredients dynamically-->
+  <ion-list formArrayName="ingredients">
+    <ion-item>
+      <ion-label position="stacked">Ingredient 1</ion-label>
+      <div [formGroupName]="0">
+        <ion-input placeholder="Amount" formControlName="amount"></ion-input>
+        <ion-input placeholder="Unit" formControlName="unit"></ion-input>
+        <ion-input placeholder="Name" formControlName="name"></ion-input>
+      </div>
+    </ion-item>
+
+    <ion-item *ngFor="let item of ingredients.controls.slice(1); let i = index">
+      <ion-label position="stacked">Ingredient {{i+2}}</ion-label>
+      <div [formGroupName]="i+1">
+        <ion-input placeholder="Amount" formControlName="amount"></ion-input>
+        <ion-input placeholder="Unit" formControlName="unit"></ion-input>
+        <ion-input placeholder="Name" formControlName="name"></ion-input>
+      </div>
+    </ion-item>
+  </ion-list>
+  <ion-button (click)="addIngredient()" expand="block">Add ingredients</ion-button>
+
+  <!--Add steps dynamically-->
+  <ion-list formArrayName="steps">
+    <ion-item>
+      <ion-label position="floating">Step 1</ion-label>
+      <ion-textarea autoGrow=true formControlName="0"></ion-textarea>
+    </ion-item>
+
+    <ion-item *ngFor="let item of steps.controls.slice(1); let i=index">
+      <ion-label position="floating">Step {{i+2}}</ion-label>
+      <ion-textarea autoGrow=true [formControlName]="i+1"></ion-textarea>
+    </ion-item>
+  </ion-list>
+  <ion-button (click)="addStepControl()" expand="block">Add steps</ion-button>
+
+  <!--Adding image using camera plugin-->
+  <ion-button (click)="addImage()" expand="full">Add na image</ion-button>
+  <img *ngIf="img" [src]="img" alt="The Image">
+
+  <ion-button (click)="submitForm()" [disabled]="addRecipeForm.invalid" expand="full">Save Recipe</ion-button>
+
+</form>
+</ion-content>

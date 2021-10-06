@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      My Favourites
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of favourites">
+    <img [src]="item.image" button [routerLink]="['/recipe-details', item.id]">
+    <ion-card-header class="borderBottom">{{item.recipeName}}</ion-card-header> 
+  </ion-card>
+</ion-content>
